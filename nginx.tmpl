@@ -121,6 +121,7 @@ server {
 		auth_basic	"Restricted {{ $host }}";
 		auth_basic_user_file	{{ (printf "/etc/nginx/htpasswd/%s" $host) }};
 		{{ end }}
+		proxy_read_timeout 5m;
 	}
 }
 {{ else }}
@@ -147,6 +148,7 @@ server {
 		auth_basic	"Restricted {{ $host }}";
 		auth_basic_user_file	{{ (printf "/etc/nginx/htpasswd/%s" $host) }};
 		{{ end }}
+		proxy_read_timeout 5m;
 	}
 }
 
