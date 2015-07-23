@@ -35,7 +35,6 @@ server {
 	listen 80;
 	server_name _; # This is just an invalid value which will never trigger on a real hostname.
 	return 503;
-  client_max_body_size 20M;
 }
 
 {{ range $host, $containers := groupByMulti $ "Env.VIRTUAL_HOST" "," }}
@@ -123,6 +122,7 @@ server {
 		auth_basic_user_file	{{ (printf "/etc/nginx/htpasswd/%s" $host) }};
 		{{ end }}
 		proxy_read_timeout 300;
+    client_max_body_size 20M;
 	}
 }
 {{ else }}
@@ -150,6 +150,7 @@ server {
 		auth_basic_user_file	{{ (printf "/etc/nginx/htpasswd/%s" $host) }};
 		{{ end }}
 		proxy_read_timeout 300;
+    client_max_body_size 20M;
 	}
 }
 
